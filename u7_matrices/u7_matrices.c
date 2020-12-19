@@ -2,6 +2,33 @@
 
 #include <stdio.h>
 
+// prototypes
+void read_input_array(int l, int arr[l][l]);
+void calculate_output_matrix(int l, int arr_output[l][l], int arr1[l][l], int arr2[l][l]);
+void print_result_matrix(int l, int arr_output[l][l]); 
+
+int main()
+{
+    int array_length = 0;
+    int input_matrix_1[50][50];
+    int input_matrix_2[50][50];
+
+    // read input Matrices length
+    scanf("%d", &array_length);
+
+    // read input Matrices
+    read_input_array(array_length, input_matrix_1);
+    read_input_array(array_length, input_matrix_2);
+
+    // define and calculate output matrix
+    int output_matrix[array_length][array_length];
+    calculate_output_matrix(array_length, output_matrix, input_matrix_1, input_matrix_2);
+
+    // print output matrix
+    print_result_matrix(array_length, output_matrix);
+    return 0;
+}
+
 //****** Procedures ******//
 
 // loop to read every array position value based on it's size (square so row = cols = array_length);
@@ -54,25 +81,3 @@ void print_result_matrix(int l, int arr_output[l][l])
 }
 
 //****** end Procedures ******//
-
-int main()
-{
-    int array_length = 0;
-    int input_matrix_1[50][50];
-    int input_matrix_2[50][50];
-
-    // read input Matrices length
-    scanf("%d", &array_length);
-
-    // read input Matrices
-    read_input_array(array_length, input_matrix_1);
-    read_input_array(array_length, input_matrix_2);
-
-    // define and calculate output matrix
-    int output_matrix[array_length][array_length];
-    calculate_output_matrix(array_length, output_matrix, input_matrix_1, input_matrix_2);
-
-    // print output matrix
-    print_result_matrix(array_length, output_matrix);
-    return 0;
-}
