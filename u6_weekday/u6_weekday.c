@@ -2,6 +2,28 @@
 
 #include <stdio.h>
 
+// Thanks for the tip!! I wanted to do it this way but didn't know how (prototypes)
+int is_leap_year(int n);
+const char *get_day_by_number(int d);
+int days_year_to_year(int y);
+int days_till_month(int m, int y);
+
+
+int main()
+{
+    int day, month, year, days_difference = 0;
+
+    // 1 - read the variables from input in yyyy-mm-dd format
+    scanf("%4d-%2d-%2d", &year, &month, &day);
+
+    // 2 - calculate the days difference
+    days_difference = day + days_till_month(month, year) + days_year_to_year(year);
+
+    //fetch day name and print results
+    printf("%s\n", get_day_by_number(days_difference));
+    return 0;
+}
+
 //****** Procedures ******//
 
 // check if a year is a leap year or not
@@ -94,18 +116,3 @@ int days_till_month(int m, int y)
 }
 
 //****** end Procedures ******//
-
-int main()
-{
-    int day, month, year, days_difference = 0;
-
-    // 1 - read the variables from input in yyyy-mm-dd format
-    scanf("%4d-%2d-%2d", &year, &month, &day);
-
-    // 2 - calculate the days difference
-    days_difference = day + days_till_month(month, year) + days_year_to_year(year);
-
-    //fetch day name and print results
-    printf("%s\n", get_day_by_number(days_difference));
-    return 0;
-}
