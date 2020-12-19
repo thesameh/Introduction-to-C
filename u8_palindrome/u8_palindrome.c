@@ -2,6 +2,51 @@
 
 #include <stdio.h>
 
+// prototypes
+int strlength(char s[]);
+int is_char(char letter);
+void get_char_only_string(int line_length, char input_line[], char char_line[]);
+void rev_string(char char_line[], char char_line_rev[]);
+int compare_strings_same_size(char s1[], char s2[]);
+
+int main()
+{
+    int is_palindrome = 1;
+    int max_char_length = 80;
+    char input_line[max_char_length];
+    char char_line[max_char_length];
+    char char_line_rev[max_char_length];
+
+    // read input line and get it's length
+    fgets(input_line, max_char_length, stdin);
+    int line_length = strlength(input_line);
+
+    // initial check if palindrome or not based on length (carefull! additional \0 is added)
+    if (line_length > 2)
+    {
+        // make a char only string out of input
+        get_char_only_string(line_length, input_line, char_line);
+
+        // get a char only reversed string
+        rev_string(char_line, char_line_rev);
+
+        // check if they are equal
+        is_palindrome = compare_strings_same_size(char_line, char_line_rev);
+    }
+
+    // print output matrix
+    if (is_palindrome)
+    {
+        printf("palindrome\n");
+    }
+    else
+    {
+        printf("not a palindrome\n");
+    }
+
+    return 0;
+}
+
 //****** Procedures ******//
 
 int strlength(char s[])
@@ -70,48 +115,8 @@ int compare_strings_same_size(char s1[], char s2[])
         {
             result = 0;
         }
-
     }
     return result;
 }
 
 //****** end Procedures ******//
-
-int main()
-{
-    int is_palindrome = 1;
-    int max_char_length = 80;
-    char input_line[max_char_length];
-    char char_line[max_char_length];
-    char char_line_rev[max_char_length];
-
-    // read input line and get it's length
-    fgets(input_line, max_char_length, stdin);
-    int line_length = strlength(input_line);
-
-    // initial check if palindrome or not based on length (carefull! additional \0 is added)
-    if (line_length > 2)
-    {
-        // make a char only string out of input
-        get_char_only_string(line_length, input_line, char_line);
-
-        // get a char only reversed string
-        rev_string(char_line, char_line_rev);
-
-        // check if they are equal
-        is_palindrome = compare_strings_same_size(char_line, char_line_rev);
-        
-    }
-
-    // print output matrix
-    if (is_palindrome)
-    {
-        printf("palindrome\n");
-    }
-    else
-    {
-        printf("not a palindrome\n");
-    }
-
-    return 0;
-}
