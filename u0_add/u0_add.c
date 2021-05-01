@@ -1,7 +1,6 @@
 #include <stdio.h>
 
-int main()
-{
+int main() {
 	int i, k;
 	scanf("%d %d", &i, &k);
 	printf("%d\n", i + k);
