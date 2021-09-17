@@ -1,0 +1,54 @@
+#!/bin/bash
+# Program: checkproject
+# Author: Markus Schordan, 2011
+# Edited: Karl Gmeiner, 2014
+
+if [ $# -ne 1 ]
+then
+  echo "Usage: $0 PROJECTNAME"
+  echo -n "Perform tests with program PROJECTNAME using the "
+  echo -n "test files 'PROJECTNAME_test*.in' and 'PROJECTNAME_test*.out'."
+else
+  project=$1
+  echo "-------------------------------------------------------"
+  echo "Checking tests for project $project: "
+  echo "- - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+  total=0
+  passed=0
+  failed=0
+  if [ ! -f $project ]; then
+    echo "Error: executable $project does not exist."
+    exit
+  fi
+  for inputfile in ${project}_test*.in; do
+    testname=`echo ${inputfile%.*}`
+    if [ ! -f $testname.out ]; then
+      echo "Error: output file $testname.out does not exist."
+      exit
+    fi
+
+    total=$[ $total +1 ]
+    ./$project < $testname.in > $testname.myout
+# Edited KG 2014: sed adds a \n if there is none. Thereby, we have something
+# syntactically equivalent to windows' fc.
+# sed is a bit different in MacOSX, hence this version differs slightly from the linux-version.
+# whoever is responsible for that, I hate you. Sincerely, KG.
+	output=$(diff <(sed -e '$a\' $testname.out) <(sed -e '$a\' $testname.myout) )
+	status=$?
+    if [ $status = "0" ] ; then
+      echo "Test: $testname : PASS"
+      rm $testname.myout
+      passed=$[ $passed +1 ]
+    else
+      echo "Test: $testname : FAIL"
+      failed=$[ $failed +1 ]
+    fi
+
+  done
+
+  echo "-------------------------------------------------------"
+  echo "Tests total : $total"
+  echo "Tests passed: $passed"
+  echo "Tests failed: $failed"
+  echo "-------------------------------------------------------"
+fi
