@@ -1,6 +1,6 @@
 # CS1 #
 
-The solutions for a set of _C_ exercises in the scope of my study at FH Technikum wien (second semester)
+The solutions for a set of _C_ exercises in the scope of my study at FH Technikum wien (first semester)
 
 ### u0_add ###
 Input/Output and Variables
