@@ -1,4 +1,4 @@
-# CS2 #
+# CS1 #
 
 The solutions for a set of _C_ exercises in the scope of my study at FH Technikum wien (second semester)
 
